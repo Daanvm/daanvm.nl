@@ -1,4 +1,9 @@
 FROM nginx:alpine
 
-COPY config/nginx/conf.d/ /etc/nginx/conf.d/
+# Clean up the default site config and files.
+RUN rm /etc/nginx/conf.d/* && \
+  rm /usr/share/nginx/html/*
+
+# Install our own site config and files.
+COPY config/nginx/conf.d /etc/nginx/conf.d
 COPY public/ /usr/share/nginx/html
