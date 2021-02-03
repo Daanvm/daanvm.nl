@@ -1,0 +1,25 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: daanvm-nl
+spec:
+  selector:
+    matchLabels:
+      app: daanvm-nl
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: daanvm-nl
+    spec:
+      containers:
+        - name: daanvm-nl-nginx
+          image: daanvm/daanvm.nl:latest
+          ports:
+            - containerPort: 80
+          lifecycle:
+            preStop:
+              exec:
+                # Gracefully shutdown nginx
+                command: ["/bin/bash", "-c", "/bin/sleep5 && /usr/sbin/nginx -s quit"]
