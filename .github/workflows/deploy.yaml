@@ -1,0 +1,48 @@
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    name: Create Kubernetes resources
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout master
+        uses: actions/checkout@master
+
+      - name: Install doctl
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+
+      - name: Save DigitalOcean kubeconfig with short-lived credentials
+        run: doctl kubernetes cluster kubeconfig save --expiry-seconds 600 k8s-daanvm
+
+      - name: Install helm 3
+        uses: azure/setup-helm@v1
+        with:
+          version: '3'
+
+      - name: Set up helm 3
+        run: |
+          helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+          helm repo add jetstack https://charts.jetstack.io
+          helm repo update
+
+      - name: Install Nginx ingress with helm
+        run: helm upgrade --install nginx-ingress ingress-nginx/ingress-nginx --set controller.publishService.enabled=true
+
+      - name: Install cert manager with helm
+        run: |
+          kubectl create namespace cert-manager --dry-run=client -o yaml | kubectl apply -f -
+          helm upgrade --install cert-manager jetstack/cert-manager --namespace cert-manager --version v1.2.0 --set installCRDs=true
+          kubectl apply -f ./config/kubernetes/cert-manager-letsencrypt.yaml
+
+      - name: Create kubernetes resources
+        run: |
+          kubectl apply -f ./config/kubernetes/daanvm-nl.yaml
+          kubectl apply -f ./config/kubernetes/ingress.yaml
+
+      - name: Get public loadbalancer IP address
+        run: kubectl get service nginx-ingress-ingress-nginx-controller -o=jsonpath='{.status.loadBalancer.ingress[*].ip}'
