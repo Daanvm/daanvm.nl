@@ -7,7 +7,7 @@ spec:
   type: ClusterIP
   ports:
     - port: 80
-      targetPort: 8080
+      targetPort: 80
   selector:
     app: daanvm-nl
 ---
@@ -26,10 +26,12 @@ spec:
         app: daanvm-nl
     spec:
       containers:
-        - name: hello-kubernetes
-          image: paulbouwer/hello-kubernetes:1.8
+        - name: daanvm-nl-nginx
+          image: daanvm/daanvm.nl:latest
           ports:
-            - containerPort: 8080
-          env:
-            - name: MESSAGE
-              value: Hello from daanvm.nl!
+            - containerPort: 80
+          lifecycle:
+            preStop:
+              exec:
+                # Gracefully shutdown nginx
+                command: ["/bin/bash", "-c", "/bin/sleep5 && /usr/sbin/nginx -s quit"]
