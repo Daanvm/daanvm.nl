@@ -5,7 +5,26 @@ on:
 
 jobs:
   build:
+    name: Build Docker images
+    runs-on: ubuntu-latest
+    steps:
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Build and push
+        id: docker_build
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          tags: daanvm/daanvm.nl:latest
+      - name: Image digest
+        run: echo ${{ steps.docker_build.outputs.digest }}
+
+  deploy-kubernetes:
     name: Create Kubernetes resources
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout master
