@@ -63,3 +63,6 @@ jobs:
 
       - name: Get public loadbalancer IP address
         run: kubectl get service nginx-ingress-ingress-nginx-controller -o=jsonpath='{.status.loadBalancer.ingress[*].ip}'
+
+      - name: Deploy new latest version of docker image
+        run: kubectl rollout restart deployment daanvm-nl
