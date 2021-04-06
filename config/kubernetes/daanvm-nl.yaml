@@ -16,7 +16,7 @@ kind: Deployment
 metadata:
   name: daanvm-nl
 spec:
-  replicas: 3
+  replicas: 2
   selector:
     matchLabels:
       app: daanvm-nl
