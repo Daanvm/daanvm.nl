@@ -11,13 +11,13 @@ jobs:
       - name: Login to DockerHub
         uses: docker/login-action@v1
         with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          username: daanvm
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Build and push daanvm.nl
         id: docker_build
         uses: docker/build-push-action@v2
         with:
-          context: ./sites/daanvm.nl/
+          context: ./sites/daanvm.nl
           push: true
           tags: daanvm/daanvm.nl:latest
       - name: Image digest
