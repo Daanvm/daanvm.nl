@@ -8,11 +8,15 @@ jobs:
     name: Build Docker images
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout master
+        uses: actions/checkout@master
+
       - name: Login to DockerHub
         uses: docker/login-action@v1
         with:
           username: daanvm
           password: ${{ secrets.DOCKERHUB_TOKEN }}
+
       - name: Build and push daanvm.nl
         id: docker_build
         uses: docker/build-push-action@v2
