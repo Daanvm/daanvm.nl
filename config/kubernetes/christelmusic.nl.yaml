@@ -1,0 +1,37 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: daanvm-nl
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: 80
+  selector:
+    app: daanvm-nl
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: daanvm-nl
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: daanvm-nl
+  template:
+    metadata:
+      labels:
+        app: daanvm-nl
+    spec:
+      containers:
+        - name: daanvm-nl-nginx
+          image: daanvm/christelmusic.nl:latest
+          ports:
+            - containerPort: 80
+          lifecycle:
+            preStop:
+              exec:
+                # Gracefully shutdown nginx
+                command: ["/bin/bash", "-c", "/bin/sleep5 && /usr/sbin/nginx -s quit"]

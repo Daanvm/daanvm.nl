@@ -18,14 +18,24 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build and push daanvm.nl
-        id: docker_build
+        id: docker_build_daanvm_nl
         uses: docker/build-push-action@v2
         with:
           context: ./sites/daanvm.nl
           push: true
           tags: daanvm/daanvm.nl:latest
       - name: Image digest
-        run: echo ${{ steps.docker_build.outputs.digest }}
+        run: echo ${{ steps.docker_build_daanvm_nl.outputs.digest }}
+
+      - name: Build and push christelmusic.nl
+        id: docker_build_christelmusic_nl
+        uses: docker/build-push-action@v2
+        with:
+          context: ./sites/christelmusic.nl
+          push: true
+          tags: daanvm/christelmusic.nl:latest
+      - name: Image digest
+        run: echo ${{ steps.docker_build_christelmusic_nl.outputs.digest }}
 
   deploy-kubernetes:
     name: Create Kubernetes resources
@@ -63,7 +73,8 @@ jobs:
 
       - name: Create kubernetes resources
         run: |
-          kubectl apply -f ./config/kubernetes/daanvm-nl.yaml
+          kubectl apply -f ./config/kubernetes/daanvm.nl.yaml
+          kubectl apply -f ./config/kubernetes/christelmusic.nl.yaml
           kubectl apply -f ./config/kubernetes/ingress.yaml
 
       - name: Get public loadbalancer IP address

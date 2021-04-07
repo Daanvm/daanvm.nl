@@ -11,10 +11,12 @@ spec:
     - hosts:
       - daanvm.nl
       - www.daanvm.nl
+      - christelmusic.nl
+      - www.christelmusic.nl
       secretName: daanvm-nl-tls
   rules:
     - host: "daanvm.nl"
-      http: &http_rules
+      http: &daanvm_nl_http_rules
         paths:
           - pathType: Prefix
             path: "/"
@@ -24,4 +26,17 @@ spec:
                 port:
                   number: 80
     - host: "www.daanvm.nl"
-      http: *http_rules
+      http: *daanvm_nl_http_rules
+
+    - host: "christelmusic.nl"
+      http: &christelmusic_nl_http_rules
+        paths:
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: christelmusic-nl
+                port:
+                  number: 80
+    - host: "www.christelmusic.nl"
+      http: *christelmusic_nl_http_rules

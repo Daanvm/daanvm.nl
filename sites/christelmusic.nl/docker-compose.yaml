@@ -1,0 +1,12 @@
+---
+version: '3'
+services:
+  nginx:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    volumes:
+      - ./public:/usr/share/nginx/html/:delegated
+    ports:
+      - '8080:80'
