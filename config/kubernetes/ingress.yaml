@@ -12,8 +12,8 @@ spec:
       - daanvm.nl
       - www.daanvm.nl
 
-#      - christelmusic.nl
-#      - www.christelmusic.nl
+      - christelmusic.nl
+      - www.christelmusic.nl
       - christelmusic.daanvm.nl
 
       secretName: daanvm-nl-tls
