@@ -19,7 +19,7 @@ footer {
 
 .page-background {
     z-index: -1;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, .2)), url(https://advertiser-api-uploads.s3.us-west-2.amazonaws.com/img-9bde5aa0-8f6d-11eb-923a-f59e735769d5.jpg);
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, .2)), url('/assets/images/watershed.png');
     background-size: cover;
     filter: blur(50px);
     transform: scale(1.1);
