@@ -1,5 +1,11 @@
 body {
     font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.2rem;
+    color: #6c757d !important;
+}
+
+.lead {
+    font-size: 1.5rem;
 }
 
 header {
@@ -7,11 +13,18 @@ header {
     border-bottom: 0 !important;
     border-top-left-radius: .3rem;
     border-top-right-radius: .3rem;
+
+    background-image: url('https://christelmusic.nl/assets/images/header.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: right top;
 }
 
 main {
     border-left: 5px solid #fff;
     border-right: 5px solid #fff;
+
+    text-align: center;
 }
 
 footer {
@@ -35,6 +48,11 @@ footer {
     width: 210% !important;
     height: 210% !important;
     opacity: .95;
+}
+
+.social-icons {
+
+    text-align: right !important;
 }
 
 .social-icons a {
