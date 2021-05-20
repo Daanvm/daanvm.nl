@@ -35,6 +35,19 @@ spec:
               exec:
                 # Gracefully shutdown nginx
                 command: ["/bin/bash", "-c", "/bin/sleep5 && /usr/sbin/nginx -s quit"]
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: daanvm-nl-php
+spec:
+  type: ClusterIP
+  ports:
+    - port: 9000
+      targetPort: 9000
+  selector:
+    app: daanvm-nl-php
 ---
 apiVersion: apps/v1
 kind: Deployment
