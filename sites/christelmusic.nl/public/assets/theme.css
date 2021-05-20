@@ -81,3 +81,7 @@ footer {
     width: 100px;
     text-align: center;
 }
+
+.form-group label {
+    text-align: right;
+}

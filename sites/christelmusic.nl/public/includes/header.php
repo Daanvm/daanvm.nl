@@ -6,7 +6,7 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous"/>
-    <link href="./assets/theme.css?v2" rel="stylesheet"/>
+    <link href="./assets/theme.css?v3" rel="stylesheet"/>
 
     <script src="https://kit.fontawesome.com/f0b0cd2378.js" crossorigin="anonymous"></script>
 
@@ -18,7 +18,7 @@
     <meta name="msapplication-TileColor" content="#00aba9">
     <meta name="theme-color" content="#ffffff">
 
-    <title>Christel Music</title>
+    <title>Christel Music<?php if(isset($page_name)) { echo ' - ' . $page_name; } ?></title>
 </head>
 <body>
 
