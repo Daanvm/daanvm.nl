@@ -35,6 +35,23 @@ spec:
               exec:
                 # Gracefully shutdown nginx
                 command: ["/bin/bash", "-c", "/bin/sleep5 && /usr/sbin/nginx -s quit"]
-
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: daanvm-nl-php
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: daanvm-nl-php
+  template:
+    metadata:
+      labels:
+        app: daanvm-nl-php
+    spec:
+      containers:
         - name: daanvm-nl-php
           image: daanvm/daanvm.nl-php:latest
+          ports:
+            - containerPort: 9000
