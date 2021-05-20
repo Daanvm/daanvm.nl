@@ -27,7 +27,7 @@ spec:
     spec:
       containers:
         - name: daanvm-nl-nginx
-          image: daanvm/daanvm.nl:latest
+          image: daanvm/daanvm.nl-nginx:latest
           ports:
             - containerPort: 80
           lifecycle:
@@ -35,3 +35,6 @@ spec:
               exec:
                 # Gracefully shutdown nginx
                 command: ["/bin/bash", "-c", "/bin/sleep5 && /usr/sbin/nginx -s quit"]
+
+        - name: daanvm-nl-php
+          image: daanvm/daanvm.nl-php:latest

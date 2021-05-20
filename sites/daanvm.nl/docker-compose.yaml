@@ -4,9 +4,17 @@ services:
   nginx:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile-nginx
     restart: unless-stopped
     volumes:
       - ./public:/usr/share/nginx/html/:delegated
     ports:
       - '8080:80'
+
+  php-fpm:
+    build:
+      context: .
+      dockerfile: Dockerfile-php
+    restart: unless-stopped
+    volumes:
+      - ./public:/usr/src/daanvm.nl/:delegated
