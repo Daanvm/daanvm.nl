@@ -107,4 +107,6 @@ jobs:
       - name: Deploy new latest version of docker image
         run: |
           kubectl rollout restart deployment daanvm-nl
+          kubectl rollout restart deployment daanvm-nl-php
           kubectl rollout restart deployment christelmusic-nl
+          kubectl rollout restart deployment christelmusic-nl-php
