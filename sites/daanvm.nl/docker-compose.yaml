@@ -1,7 +1,7 @@
 ---
 version: '3'
 services:
-  nginx:
+  daanvm-nl-nginx:
     build:
       context: .
       dockerfile: Dockerfile-nginx
@@ -11,7 +11,7 @@ services:
     ports:
       - '8080:80'
 
-  php-fpm:
+  daanvm-nl-php:
     build:
       context: .
       dockerfile: Dockerfile-php
