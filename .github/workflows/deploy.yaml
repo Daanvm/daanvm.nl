@@ -39,15 +39,27 @@ jobs:
       - name: Image digest
         run: echo ${{ steps.docker_build_daanvm_nl_php.outputs.digest }}
 
-      - name: Build and push christelmusic.nl
-        id: docker_build_christelmusic_nl
+      - name: Build and push christelmusic.nl-nginx
+        id: docker_build_christelmusic_nl_nginx
         uses: docker/build-push-action@v2
         with:
           context: ./sites/christelmusic.nl
+          file: ./sites/christelmusic.nl/Dockerfile-nginx
           push: true
-          tags: daanvm/christelmusic.nl:latest
+          tags: daanvm/christelmusic.nl-nginx:latest
       - name: Image digest
-        run: echo ${{ steps.docker_build_christelmusic_nl.outputs.digest }}
+        run: echo ${{ steps.docker_build_christelmusic_nl_nginx.outputs.digest }}
+
+      - name: Build and push christelmusic.nl-php
+        id: docker_build_christelmusic_nl_php
+        uses: docker/build-push-action@v2
+        with:
+          context: ./sites/christelmusic.nl
+          file: ./sites/christelmusic.nl/Dockerfile-php
+          push: true
+          tags: daanvm/christelmusic.nl-php:latest
+      - name: Image digest
+        run: echo ${{ steps.docker_build_christelmusic_nl_php.outputs.digest }}
 
   deploy-kubernetes:
     name: Create Kubernetes resources
