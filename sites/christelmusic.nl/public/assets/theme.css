@@ -82,6 +82,7 @@ footer {
     text-align: center;
 }
 
-.form-group label {
+.form-group label,
+.form-group .invalid-feedback {
     text-align: left;
 }

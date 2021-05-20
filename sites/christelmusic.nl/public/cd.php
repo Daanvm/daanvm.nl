@@ -1,6 +1,147 @@
 <?php
-    $page_name = 'Order album Watershed';
-    require './includes/header.php';
+
+class FormData
+{
+    /**
+     * Indicates if the form was already submitted, to differentiate which class
+     * to return. When unsubmitted, empty is not invalid.
+     */
+    private $is_submitted;
+
+    public $name;
+    public $email;
+    public $address;
+    public $postalCode;
+    public $city;
+    public $country;
+    public $quantity;
+
+    private $errorMessages = [];
+
+    public static function fromPost(array $postData): self
+    {
+        $formData = new self();
+        $formData->is_submitted = true;
+        $formData->name = $postData['name'];
+        $formData->email = $postData['email'];
+        $formData->address = $postData['address'];
+        $formData->postalCode = $postData['postalCode'];
+        $formData->city = $postData['city'];
+        $formData->country = $postData['country'];
+        $formData->quantity = intval($postData['quantity']);
+
+        $formData->validate();
+
+        return $formData;
+    }
+
+    public static function empty(): self
+    {
+        $formData = new self();
+        $formData->is_submitted = false;
+        $formData->country = 'The Netherlands';
+
+        return $formData;
+    }
+
+    public function isValid(): bool
+    {
+        return count($this->errorMessages) == 0;
+    }
+
+    public function getHtmlClass(string $field): string
+    {
+        if (!$this->is_submitted) {
+            return '';
+        }
+
+        if (!empty($this->errorMessages[$field])) {
+            return 'is-invalid';
+        } else {
+            return 'is-valid';
+        }
+    }
+
+    public function getHtmlFeedback(string $field): string
+    {
+        if (!$this->is_submitted) {
+            return '';
+        }
+
+        if (!empty($this->errorMessages[$field])) {
+            return sprintf('<div class="invalid-feedback">%s</div>', $this->errorMessages[$field]);
+        }
+
+        return '';
+    }
+
+    private function validate(): void
+    {
+        foreach (['name', 'email', 'address', 'postalCode', 'city', 'country', 'quantity'] as $field) {
+            if (empty($this->{$field})) {
+                $this->errorMessages[$field] = 'This is a required field.';
+            }
+        }
+
+        if (!isset($this->errorMessages['email']) && !filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
+            $this->errorMessages['email'] = 'This is an invalid email address.';
+        }
+    }
+}
+
+if (!empty($_POST['submit'])) {
+    $data = FormData::fromPost($_POST);
+
+    if ($data->isValid()) {
+        // Send email.
+        $message = "
+Hoi Christel!<br />
+<br />
+Er is een nieuwe bestelling geplaatst voor je CD:<br />
+<br />        
+Name: " . htmlentities($data->name) . "<br />
+Email: " . htmlentities($data->email) . "<br />
+Address: " . htmlentities($data->address) . "<br />
+Postal Code: " . htmlentities($data->postalCode) . "<br />
+City: " . htmlentities($data->city) . "<br />
+Country: " . htmlentities($data->country) . "<br />
+Quantity: " . htmlentities($data->quantity) . "<br />
+<br />        
+Groetjes,<br />
+Je websitebouwer<br />
+";
+
+        $payload = [
+            'value1' /* name */ => $data->name,
+            'value2' /* message */ => $message,
+            'value3' /* unused */ => null,
+        ];
+
+        $ifttt_key = getenv('IFTTT_KEY');
+
+        $ch = curl_init('https://maker.ifttt.com/trigger/watershed_ordered/with/key/' . $ifttt_key);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($payload));
+        curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
+
+        $result = curl_exec($ch);
+        curl_close($ch);
+
+        if ($result) {
+            // Redirect to success message.
+            header('Location: /thanks');
+            exit;
+        } else {
+            echo "There was an error.";
+            exit;
+        }
+    }
+} else {
+    $data = FormData::empty();
+}
+
+$page_name = 'Order album Watershed';
+require './includes/header.php';
+
 ?>
 
 <div class="row">
@@ -13,57 +154,68 @@
             <div class="form-group row">
                 <label for="name" class="col-sm-3 col-form-label">Name</label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control" id="name" />
+                    <input type="text" class="form-control <?=$data->getHtmlClass('name')?>" id="name" name="name" value="<?=htmlentities($data->name)?>" />
+                    <?=$data->getHtmlFeedback('name')?>
                 </div>
             </div>
             <div class="form-group row">
                 <label for="email" class="col-sm-3 col-form-label">Email</label>
                 <div class="col-sm-9">
-                    <input type="email" class="form-control" id="email" />
+                    <input type="email" class="form-control <?=$data->getHtmlClass('email')?>" id="email" name="email" value="<?=htmlentities($data->email)?>" />
+                    <?=$data->getHtmlFeedback('email')?>
                 </div>
             </div>
             <div class="form-group row">
                 <label for="address" class="col-sm-3 col-form-label">Address</label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control" id="address" />
+                    <input type="text" class="form-control <?=$data->getHtmlClass('address')?>" id="address" name="address" value="<?=htmlentities($data->address)?>" />
+                    <?=$data->getHtmlFeedback('address')?>
                 </div>
             </div>
             <div class="form-group row">
-                <label for="postalcode" class="col-sm-3 col-form-label">Postal code</label>
+                <label for="postalCode" class="col-sm-3 col-form-label">Postal code</label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control" id="postalcode" />
+                    <input type="text" class="form-control <?=$data->getHtmlClass('postalCode')?>" id="postalCode" name="postalCode" value="<?=htmlentities($data->postalCode)?>" />
+                    <?=$data->getHtmlFeedback('postalCode')?>
                 </div>
             </div>
             <div class="form-group row">
                 <label for="city" class="col-sm-3 col-form-label">City</label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control" id="city" />
+                    <input type="text" class="form-control <?=$data->getHtmlClass('city')?>" id="city" name="city" value="<?=htmlentities($data->city)?>" />
+                    <?=$data->getHtmlFeedback('city')?>
                 </div>
             </div>
             <div class="form-group row">
                 <label for="country" class="col-sm-3 col-form-label">Country</label>
                 <div class="col-sm-9">
-                    <select class="form-control" id="country">
-                        <option value="The Netherlands" selected="selected">The Netherlands</option>
+                    <select class="form-control <?=$data->getHtmlClass('country')?>" id="country" name="country">
                         <?php
                         $countries = require('./includes/countries.php');
-                        unset($countries['NL']);
+                        $countries['NL'] = 'The Netherlands'; // Add 'The' prefix.
 
                         foreach ($countries as $country) {
-                            printf('<option value="%s">%s</option>'.PHP_EOL, $country, $country);
+                            printf(
+                                '<option value="%s" %s>%s</option>' . PHP_EOL,
+                                $country,
+                                $data->country == $country ? 'selected' : '',
+                                $country
+                            );
                         }
                         ?>
                     </select>
+                    <?=$data->getHtmlFeedback('country')?>
                 </div>
             </div>
             <div class="form-group row">
                 <label for="quantity" class="col-sm-3 col-form-label">Quantity</label>
                 <div class="col-sm-9">
-                    <select class="form-control" id="quantity">
-                        <option value="1">1 CD - €8.00 + shipping costs</option>
-                        <option value="2">2 CDs - €16.00 + shipping costs</option>
-                        <option value="3">3 CDs - €24.00 + shipping costs</option>
+                    <select class="form-control <?=$data->getHtmlClass('quantity')?>" id="quantity" name="quantity">
+                        <option value="1"<?=$data->quantity == 1 ? 'selected' : ''?>>1 CD - €8.00 + shipping costs</option>
+                        <option value="2"<?=$data->quantity == 2 ? 'selected' : ''?>>2 CDs - €16.00 + shipping costs</option>
+                        <option value="3"<?=$data->quantity == 3 ? 'selected' : ''?>>3 CDs - €24.00 + shipping costs</option>
                     </select>
+                    <?=$data->getHtmlFeedback('quantity')?>
                 </div>
             </div>
             <div class="row">
@@ -73,7 +225,7 @@
             </div>
             <div class="form-group row">
                 <div class="col-sm-12">
-                    <button type="submit" class="btn btn-primary">Order now</button>
+                    <button type="submit" name="submit" value="submit" class="btn btn-primary">Order now</button>
                 </div>
             </div>
         </form>
