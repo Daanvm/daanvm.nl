@@ -66,5 +66,11 @@ spec:
       containers:
         - name: christelmusic-nl-php
           image: daanvm/christelmusic.nl-php:latest
+          env:
+            - name: IFTTT_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: ifttt
+                  key: key
           ports:
             - containerPort: 9000
