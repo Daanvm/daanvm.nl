@@ -44,12 +44,12 @@
                        href="https://open.spotify.com/album/5SpgF9L5ek58qnjjP9dbIm?si=KyQQ-Vt3TkWDK0EuihSpmA">Listen</a>
                 </td>
             </tr>
-<!--            <tr>-->
-<!--                <td><i class="fab fa-apple"></i> Apple Music</td>-->
-<!--                <td><a class="btn btn-outline-secondary" target="_blank"-->
-<!--                       href="https://music.apple.com/nl/album/daydream-single/1563040219?l=en">Listen</a>-->
-<!--                </td>-->
-<!--            </tr>-->
+            <tr>
+                <td><i class="fab fa-apple"></i> Apple Music</td>
+                <td><a class="btn btn-outline-secondary" target="_blank"
+                       href="https://music.apple.com/nl/album/watershed/1566134580">Listen</a>
+                </td>
+            </tr>
             <tr>
                 <td><i class="fab fa-deezer"></i> Deezer</td>
                 <td><a class="btn btn-outline-secondary" target="_blank"
