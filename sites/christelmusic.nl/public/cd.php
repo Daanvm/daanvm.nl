@@ -147,6 +147,7 @@ require './includes/header.php';
 <div class="row">
     <div class="col-md-6 offset-md-3">
         <h1>Order now: Watershed</h1>
+        <p>€8,00 (+ shipping costs)</p>
         <p>
             <img src="/assets/images/jewelcase_watershed.jpg" class="img-fluid"/>
         </p>

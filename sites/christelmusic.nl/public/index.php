@@ -16,7 +16,10 @@
     <div class="col-md-12">
         <h1>Out now: Watershed</h1>
         <p>
-            <img src="/assets/images/watershed.png" class="img-fluid border"/>
+            <img src="/assets/images/jewelcase_watershed.jpg" class="img-fluid"/>
+        </p>
+        <p>
+            <a class="btn btn-primary" href="/cd" target="_blank" role="button">Order the CD for €8.00</a>
         </p>
         <p>Full album <em>Watershed</em> is now available on all streaming platforms.</p>
         <p><em>
