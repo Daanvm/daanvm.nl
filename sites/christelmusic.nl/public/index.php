@@ -60,11 +60,11 @@
                 <td><a class="btn btn-outline-secondary" target="_blank"
                        href="https://tidal.com/browse/album/183080996">Listen</a></td>
             </tr>
-<!--            <tr>-->
-<!--                <td><i class="fab fa-amazon"></i> Amazon</td>-->
-<!--                <td><a class="btn btn-outline-secondary" target="_blank"-->
-<!--                       href="https://music.amazon.com/albums/B092JR86Q7">Listen</a></td>-->
-<!--            </tr>-->
+            <tr>
+                <td><i class="fab fa-amazon"></i> Amazon</td>
+                <td><a class="btn btn-outline-secondary" target="_blank"
+                       href="https://music.amazon.com/albums/B09476LFPX">Listen</a></td>
+            </tr>
         </table>
     </div>
 </div>
