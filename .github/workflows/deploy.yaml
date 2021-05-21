@@ -106,7 +106,7 @@ jobs:
 
       - name: Deploy new latest version of docker image
         run: |
-          kubectl create secret generic ifttt --from-literal='key=${{ secrets.IFTTT_KEY }}'
+          kubectl create secret generic ifttt --save-config --dry-run=client --from-literal='key=${{ secrets.IFTTT_KEY }}' -o yaml | kubectl apply -f -
           kubectl rollout restart deployment daanvm-nl
           kubectl rollout restart deployment daanvm-nl-php
           kubectl rollout restart deployment christelmusic-nl
