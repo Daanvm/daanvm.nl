@@ -14,7 +14,7 @@
 
 <div class="row mt-4">
     <div class="col-md-12">
-        <h1>Out now: Watershed</h1>
+        <h1>Album out now: Watershed</h1>
         <p>
             <img src="/assets/images/jewelcase_watershed.jpg" class="img-fluid"/>
         </p>
@@ -74,7 +74,7 @@
 
 <div class="row mt-5">
     <div class="col-md-12">
-        <h1>Out now: Daydream</h1>
+        <h1>Single out now: Daydream</h1>
         <p>
             <img src="/assets/images/daydream.jpg?v2" class="img-fluid border"/>
         </p>
@@ -121,7 +121,7 @@
 
 <div class="row mt-5">
     <div class="col-md-12">
-        <h1>Out now: Watershed</h1>
+        <h1>Single out now: Watershed</h1>
         <p>
             <img src="/assets/images/watershed.png" class="img-fluid border"/>
         </p>
