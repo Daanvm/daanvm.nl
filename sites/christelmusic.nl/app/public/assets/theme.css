@@ -11,7 +11,7 @@ body {
 .btn-primary {
     background-image: url('/assets/images/btn-background.png');
     background-repeat: no-repeat;
-    background-size: auto;
+    background-size: cover;
     border-color: black;
 }
 .btn-primary:hover {
