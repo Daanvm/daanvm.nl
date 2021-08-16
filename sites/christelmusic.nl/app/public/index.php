@@ -19,19 +19,20 @@
             <img src="/assets/images/jewelcase_watershed.jpg" class="img-fluid"/>
         </p>
         <p>
-            <a class="btn btn-primary" href="/cd" target="_blank" role="button">Order the CD for €8.00</a>
+            <a class="btn btn-primary" href="/cd" role="button">Order the CD for €8.00</a>
+<!--            <a class="btn btn-primary" href="/sheetmusic" role="button">Download sheet music</a>-->
         </p>
         <p>Full album <em>Watershed</em> is now available on all streaming platforms.</p>
-        <p><em>
-            1. Watershed<br />
-            2. A Glimpse of Hope<br />
-            3. On the Run<br />
-            4. Memories<br />
-            5. Chased by Shadows<br />
-            6. Daydream<br />
-            7. Mischievous Exploration<br />
-            8. The Vigor of the Ocean<br />
-        </em></p>
+        <ol class="album-tracks">
+            <li>Watershed</li>
+            <li>A Glimpse of Hope</li>
+            <li>On the Run</li>
+            <li>Memories</li>
+            <li>Chased by Shadows</li>
+            <li>Daydream</li>
+            <li>Mischievous Exploration</li>
+            <li>The Vigor of the Ocean</li>
+        </ol>
     </div>
 </div>
 <div class="row justify-content-center">

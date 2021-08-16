@@ -8,6 +8,16 @@ body {
     font-size: 1.5rem;
 }
 
+.btn-primary {
+    background-image: url('/assets/images/btn-background.png');
+    background-repeat: no-repeat;
+    background-size: auto;
+    border-color: black;
+}
+.btn-primary:hover {
+    border-color: black;
+}
+
 header {
     border: 5px solid #fff;
     border-bottom: 0 !important;
@@ -62,6 +72,13 @@ footer {
     font-size: 1.5rem;
 }
 
+ol.album-tracks {
+    text-align: center;
+    list-style-position: inside;
+    font-style: italic;
+    padding: 0;
+}
+
 .get-track {
     min-width: 300px;
     text-align: left;
@@ -74,7 +91,6 @@ footer {
 
 .get-track img.icon {
     width: 30px;
-    fill: red;
 }
 
 .get-track .btn {
@@ -85,4 +101,12 @@ footer {
 .form-group label,
 .form-group .invalid-feedback {
     text-align: left;
+}
+
+.row-sheetmusic {
+    text-align: left;
+}
+
+.row-sheetmusic img {
+    background-color: grey;
 }

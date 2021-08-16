@@ -6,4 +6,4 @@ RUN rm /etc/nginx/conf.d/* && \
 
 # Install our own site config and files.
 COPY config/nginx/conf.d /etc/nginx/conf.d
-COPY public/ /usr/share/nginx/html
+COPY app/public/ /usr/share/nginx/html

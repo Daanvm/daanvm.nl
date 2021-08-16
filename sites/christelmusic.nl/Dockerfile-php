@@ -1,7 +1,19 @@
+FROM composer:2 as builder
+WORKDIR /app/
+COPY app/composer.* ./
+RUN composer install --ignore-platform-req ext-imagick
+
 FROM php:8.0-fpm
 
 # Use the default production configuration
 RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 
-COPY public/ /usr/src/christelmusic.nl
+RUN apt-get update && apt-get install -y libmagickwand-dev ghostscript --no-install-recommends \
+    && pecl install imagick \
+    && docker-php-ext-enable imagick \
+    && sed -i '/disable ghostscript format types/,+6d' /etc/ImageMagick-6/policy.xml
+
+COPY app/ /usr/src/christelmusic.nl
+COPY --from=builder /app/vendor /usr/src/christelmusic.nl/vendor
+
 WORKDIR /usr/src/christelmusic.nl

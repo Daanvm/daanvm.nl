@@ -7,7 +7,7 @@ services:
       dockerfile: Dockerfile-nginx
     restart: unless-stopped
     volumes:
-      - ./public:/usr/share/nginx/html/:delegated
+      - ./app/public:/usr/share/nginx/html/:delegated
     ports:
       - '8080:80'
 
@@ -17,4 +17,10 @@ services:
       dockerfile: Dockerfile-php
     restart: unless-stopped
     volumes:
-      - ./public:/usr/src/christelmusic.nl/:delegated
+      - ./app:/usr/src/christelmusic.nl/:delegated
+
+  composer-build:
+    image: composer:2
+    volumes:
+      - ./app:/app/:delegated
+    command: "composer install --ignore-platform-req ext-imagick"
