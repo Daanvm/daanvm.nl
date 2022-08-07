@@ -9,13 +9,19 @@ body {
 }
 
 .btn-primary {
-    background-image: url('/assets/images/btn-background.png');
+    background-color: #121212;
     background-repeat: no-repeat;
     background-size: cover;
     border-color: black;
 }
 .btn-primary:hover {
     border-color: black;
+}
+.btn-primary.btn-watershed {
+    background-image: url('/assets/images/btn-background-watershed.png');
+}
+.btn-primary.btn-landslide {
+    background-image: url('/assets/images/btn-background-landslide.png');
 }
 
 header {

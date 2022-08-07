@@ -30,7 +30,7 @@ $sheetMusics = [
         <div class="col-6 col-md-3">
             <p><b>Song name:</b> <?=$sheetMusic->songName?></p>
             <p><b>Number of pages:</b> <?=$sheetMusic->getNumberOfPages()?></p>
-            <p><a class="btn btn-primary" target="_blank" href="<?=$sheetMusic->getPdfUrl()?>" role="button">Download <?=$sheetMusic->songName?> sheet music</a></p>
+            <p><a class="btn btn-primary btn-watershed" target="_blank" href="<?=$sheetMusic->getPdfUrl()?>" role="button">Download <?=$sheetMusic->songName?> sheet music</a></p>
         </div>
     </div>
 <?php endforeach;?>

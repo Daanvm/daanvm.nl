@@ -141,7 +141,7 @@ require './includes/header.php';
             </div>
             <div class="form-group row">
                 <div class="col-sm-12">
-                    <button type="submit" name="submit" value="submit" class="btn btn-primary">Order now</button>
+                    <button type="submit" name="submit" value="submit" class="btn btn-primary btn-watershed">Order now</button>
                 </div>
             </div>
         </form>

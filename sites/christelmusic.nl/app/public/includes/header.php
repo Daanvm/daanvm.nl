@@ -27,7 +27,7 @@
 <div class="container-lg">
     <header class="row mt-4 g-0">
         <div class="col-xs-12">
-            <a href="/"><img src="./assets/images/header_with_photo.png" class="img-fluid"/></a>
+            <a href="/"><img src="./assets/images/header_landslide.jpg" class="img-fluid"/></a>
         </div>
     </header>
 
