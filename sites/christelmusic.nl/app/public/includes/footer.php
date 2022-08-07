@@ -2,7 +2,7 @@
     </main>
 
     <footer class="row mb-4 g-0 bg-white justify-content-center text-center text-secondary">
-        <p>&copy; 2021 Christel Hoogendoorn</p>
+        <p>&copy; <?php echo date('Y'); ?> Christel Hoogendoorn</p>
     </footer>
 </div>
 
