@@ -20,7 +20,7 @@ class Watershed implements ReleaseProject
 
     public function getHeaderImageUrl(): LocalUrl
     {
-        return new LocalUrl("/assets/images/header_watershed.png");
+        return new LocalUrl("/assets/images/header_watershed.jpg");
     }
 
     /**
@@ -120,7 +120,7 @@ class Watershed implements ReleaseProject
 
                 public function getImageUrl(): LocalUrl
                 {
-                    return new LocalUrl("/assets/images/watershed.png");
+                    return new LocalUrl("/assets/images/watershed.jpg");
                 }
 
                 public function getPreSaveLink(): ?string

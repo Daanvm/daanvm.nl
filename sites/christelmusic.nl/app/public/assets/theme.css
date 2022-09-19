@@ -18,10 +18,10 @@ body {
     border-color: black;
 }
 .btn-primary.btn-watershed {
-    background-image: url('/assets/images/btn-background-watershed.png');
+    background-image: url('/assets/images/btn-background-watershed.jpg');
 }
 .btn-primary.btn-landslide {
-    background-image: url('/assets/images/btn-background-landslide.png');
+    background-image: url('/assets/images/btn-background-landslide.jpg');
 }
 
 header {
@@ -51,7 +51,7 @@ footer {
 
 .page-background {
     z-index: -1;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, .2)), url('/assets/images/watershed.png');
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, .2)), url('/assets/images/landslide.jpg');
     background-size: cover;
     filter: blur(50px);
     transform: scale(1.1);
