@@ -1,6 +1,6 @@
 <?php
 
-$page_name = 'Thanks';
+$pageName = 'Thanks';
 require './includes/header.php';
 
 ?>

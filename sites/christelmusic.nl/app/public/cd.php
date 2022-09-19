@@ -54,7 +54,7 @@ Je websitebouwer<br />
     $data = FormData::empty();
 }
 
-$page_name = 'Order album Watershed';
+$pageName = 'Order album Watershed';
 require './includes/header.php';
 
 ?>

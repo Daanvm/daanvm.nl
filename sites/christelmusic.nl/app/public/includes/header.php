@@ -1,11 +1,24 @@
+<?php
+/**
+ * @var ?string $pageName
+ * @var ?ReleaseProject $releaseProject
+ */
+
+use ChristelMusic\Releases\Landslide;
+use ChristelMusic\Releases\ReleaseProject;
+
+if (!isset($releaseProject)) {
+    $releaseProject = new Landslide();
+}
+?>
+
 <!doctype html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
     <link href="./assets/theme.css?v7" rel="stylesheet"/>
 
     <script src="https://kit.fontawesome.com/f0b0cd2378.js" crossorigin="anonymous"></script>
@@ -18,7 +31,7 @@
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
 
-    <title>Christel Music<?php if(isset($page_name)) { echo ' - ' . $page_name; } ?></title>
+    <title>Christel Music<?php if(isset($pageName)) { echo ' - ' . $pageName; } ?></title>
 </head>
 <body>
 
@@ -27,7 +40,7 @@
 <div class="container-lg">
     <header class="row mt-4 g-0">
         <div class="col-xs-12">
-            <a href="/"><img src="./assets/images/header_landslide.jpg" class="img-fluid"/></a>
+            <a href="/"><img src="<?=$releaseProject->getHeaderImageUrl()?>" class="img-fluid"/></a>
         </div>
     </header>
 

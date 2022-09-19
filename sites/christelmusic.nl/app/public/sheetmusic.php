@@ -4,7 +4,7 @@ use ChristelMusic\SheetMusic;
 
 require_once '../vendor/autoload.php';
 
-$page_name = 'Sheet music';
+$pageName = 'Sheet music';
 require './includes/header.php';
 
 $sheetMusics = [

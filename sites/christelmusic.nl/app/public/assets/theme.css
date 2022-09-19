@@ -85,6 +85,7 @@ ol.album-tracks {
 }
 
 .get-track {
+    margin: 20px auto 0;
     min-width: 300px;
     text-align: left;
 }
