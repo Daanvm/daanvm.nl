@@ -30,7 +30,6 @@ header {
     border-top-left-radius: .3rem;
     border-top-right-radius: .3rem;
 
-    background-image: url('/assets/images/header.png');
     background-repeat: no-repeat;
     background-size: contain;
     background-position: right top;
