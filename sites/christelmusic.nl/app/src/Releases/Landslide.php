@@ -58,7 +58,7 @@ class Landslide implements ReleaseProject
                         'Butterflies',
                         'On Your Own',
                         'Fairytale Forest Pt. 1',
-                        'Nightly Ghost',
+                        'Nightly Ghosts',
                         'The Unknown',
                         'Supremacy',
                         'Fairytale Forest Pt. 2',
@@ -89,7 +89,18 @@ class Landslide implements ReleaseProject
                  */
                 public function getSheetMusics(): array
                 {
-                    return [];
+                    return [
+                        new SheetMusic('Butterflies', 'landslide/01 Butterflies.pdf'),
+                        new SheetMusic('On Your Own', 'landslide/02 On_Your_Own.pdf'),
+                        new SheetMusic('Fairytale Forest Pt. 1', 'landslide/03 Fairytale_Forest_Pt._1.pdf'),
+                        new SheetMusic('Nightly Ghosts', 'landslide/04 Nightly_Ghosts.pdf'),
+                        new SheetMusic('The Unknown', 'landslide/05 The_Unknown.pdf'),
+                        new SheetMusic('Supremacy', 'landslide/06 Supremacy.pdf'),
+                        new SheetMusic('Fairytale Forest Pt. 2', 'landslide/07 Fairytale_Forest_Pt._2.pdf'),
+                        new SheetMusic('You Found Me', 'landslide/08 You_Found_Me.pdf'),
+                        new SheetMusic('Summer Stroll', 'landslide/09 Summer_Stroll.pdf'),
+                        new SheetMusic('Fairytale Forest Pt. 3', 'landslide/10 Fairytale_Forest_Pt._3.pdf'),
+                    ];
                 }
             },
             new class implements ReleaseItemSingle {
