@@ -109,10 +109,17 @@ ol.album-tracks {
     text-align: left;
 }
 
-.row-sheetmusic {
-    text-align: left;
+.sheetmusic {
+    margin: 0 auto;
 }
-
-.row-sheetmusic img {
-    background-color: grey;
+.sheetmusic td {
+    text-align: left;
+    vertical-align: top;
+}
+.sheetmusic .songname {
+    display: block;
+    margin-top: 30px;
+}
+.sheetmusic img {
+    width: 200px;
 }

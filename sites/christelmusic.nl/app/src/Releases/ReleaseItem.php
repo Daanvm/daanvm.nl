@@ -3,6 +3,7 @@
 namespace ChristelMusic\Releases;
 
 use ChristelMusic\LocalUrl;
+use ChristelMusic\SheetMusic;
 use DateTimeImmutable;
 
 interface ReleaseItem
@@ -12,4 +13,9 @@ interface ReleaseItem
     public function getImageUrl(): LocalUrl;
     public function getPreSaveLink(): ?string;
     public function getStreamingInformation(): ReleaseStreamingInformation;
+
+    /**
+     * @return SheetMusic[]
+     */
+    public function getSheetMusics(): array;
 }

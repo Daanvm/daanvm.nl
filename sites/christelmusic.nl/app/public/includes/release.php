@@ -95,6 +95,29 @@ foreach($releaseProject->getReleaseItems() as $releaseItem):
     </div>
 </div>
 
+<?php
+$sheetMusics = $releaseItem->getSheetMusics();
+if (count($sheetMusics) > 0):
+?>
+<div class="row mt-5">
+    <div class="col-md-8 offset-md-2">
+        <h2>Download free sheet music</h2>
+
+        <table class="sheetmusic">
+        <?php foreach($sheetMusics as $sheetMusic): ?>
+            <tr>
+                <td><img src="data:image/png;base64,<?=$sheetMusic->getBase64encodedPngData()?>" width="100%" /></td>
+                <td>
+                    <span class="songname"><?=$sheetMusic->songName?></span>
+                    <a class="btn btn-primary btn-watershed" target="_blank" href="<?=$sheetMusic->getPdfUrl()?>" role="button">Download <?=$sheetMusic->getNumberOfPages()?> page<?=$sheetMusic->getNumberOfPages() == 0 ? "" : "s"?></a>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+        </table>
+    </div>
+</div>
+<?php endif; ?>
+
 <hr />
 <?php endforeach; ?>
 

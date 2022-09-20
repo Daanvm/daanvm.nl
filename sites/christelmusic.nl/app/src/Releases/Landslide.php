@@ -3,6 +3,7 @@
 namespace ChristelMusic\Releases;
 
 use ChristelMusic\LocalUrl;
+use ChristelMusic\SheetMusic;
 use DateTimeImmutable;
 use DateTimeZone;
 
@@ -82,6 +83,14 @@ class Landslide implements ReleaseProject
                         '',
                     );
                 }
+
+                /**
+                 * @return SheetMusic[]
+                 */
+                public function getSheetMusics(): array
+                {
+                    return [];
+                }
             },
             new class implements ReleaseItemSingle {
                 public function getTitle(): string
@@ -114,6 +123,14 @@ class Landslide implements ReleaseProject
                         'https://music.amazon.com/albums/B0B8MVP2SW',
                     );
                 }
+
+                /**
+                 * @return SheetMusic[]
+                 */
+                public function getSheetMusics(): array
+                {
+                    return [];
+                }
             },
             new class implements ReleaseItemSingle {
                 public function getTitle(): string
@@ -145,6 +162,14 @@ class Landslide implements ReleaseProject
                         null,
                         'https://music.amazon.com/albums/B0B8MVM9WR',
                     );
+                }
+
+                /**
+                 * @return SheetMusic[]
+                 */
+                public function getSheetMusics(): array
+                {
+                    return [];
                 }
             },
         ];

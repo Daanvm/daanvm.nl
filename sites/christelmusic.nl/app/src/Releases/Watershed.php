@@ -3,6 +3,7 @@
 namespace ChristelMusic\Releases;
 
 use ChristelMusic\LocalUrl;
+use ChristelMusic\SheetMusic;
 use DateTimeImmutable;
 use DateTimeZone;
 
@@ -79,6 +80,20 @@ class Watershed implements ReleaseProject
                         'https://music.amazon.com/albums/B09476LFPX',
                     );
                 }
+
+                /**
+                 * @return SheetMusic[]
+                 */
+                public function getSheetMusics(): array
+                {
+                    return [
+                        new SheetMusic('Watershed', 'watershed/Watershed.pdf'),
+                        new SheetMusic('A Glimpse of Hope', 'watershed/A Glimpse of Hope.pdf'),
+                        new SheetMusic('Memories', 'watershed/Memories.pdf'),
+                        new SheetMusic('Chased by Shadows', 'watershed/Chased by Shadows.pdf'),
+                        new SheetMusic('Mischievous Exploration', 'watershed/Mischievous Exploration.pdf'),
+                    ];
+                }
             },
             new class implements ReleaseItemSingle {
                 public function getTitle(): string
@@ -111,6 +126,14 @@ class Watershed implements ReleaseProject
                         'https://music.amazon.com/albums/B092JR86Q7',
                     );
                 }
+
+                /**
+                 * @return SheetMusic[]
+                 */
+                public function getSheetMusics(): array
+                {
+                    return [];
+                }
             },
             new class implements ReleaseItemSingle {
                 public function getTitle(): string
@@ -142,6 +165,14 @@ class Watershed implements ReleaseProject
                         'https://tidal.com/track/178478594',
                         'https://music.amazon.com/albums/B0917G2C7V',
                     );
+                }
+
+                /**
+                 * @return SheetMusic[]
+                 */
+                public function getSheetMusics(): array
+                {
+                    return [];
                 }
             },
         ];
