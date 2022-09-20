@@ -15,13 +15,14 @@ require './includes/header.php';
 
 foreach($releaseProject->getReleaseItems() as $releaseItem):
     $isNotReleasedYet = $releaseItem->getReleaseDate() > new DateTimeImmutable();
+    $isAlreadyReleased = !$isNotReleasedYet;
 ?>
 <div class="row mt-5">
     <div class="col-md-6 order-md-2">
         <p>
             <img src="<?=$releaseItem->getImageUrl()?>" class="img-fluid"/>
         </p>
-        <?php if ($releaseItem instanceof ReleaseItemAlbum && !$isNotReleasedYet): ?>
+        <?php if ($releaseItem instanceof ReleaseItemAlbum && $isAlreadyReleased): ?>
             <p>
                 <a class="btn btn-primary btn-<?=$releaseProject->getSlug()?>" href="/cd" role="button">Order the CD for €8.00</a>
             </p>
@@ -97,7 +98,7 @@ foreach($releaseProject->getReleaseItems() as $releaseItem):
 
 <?php
 $sheetMusics = $releaseItem->getSheetMusics();
-if (count($sheetMusics) > 0):
+if (count($sheetMusics) > 0 && ($isAlreadyReleased || isset($_GET['test']))):
 ?>
 <div class="row mt-5">
     <div class="col-md-8 offset-md-2">
