@@ -23,7 +23,7 @@ foreach($releaseProject->getReleaseItems() as $releaseItem):
         </p>
         <?php if ($releaseItem instanceof ReleaseItemAlbum && !$isNotReleasedYet): ?>
             <p>
-                <a class="btn btn-primary btn-<?=$releaseProject->getSlug()?>>" href="/cd" role="button">Order the CD for €8.00</a>
+                <a class="btn btn-primary btn-<?=$releaseProject->getSlug()?>" href="/cd" role="button">Order the CD for €8.00</a>
             </p>
         <?php endif; ?>
     </div>
