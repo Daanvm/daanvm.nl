@@ -23,6 +23,11 @@ class Landslide implements ReleaseProject
         return new LocalUrl("/assets/images/header_landslide.jpg");
     }
 
+    public function getProjectImageUrl(): LocalUrl
+    {
+        return new LocalUrl("/assets/images/project_landslide.jpg");
+    }
+
     /**
      * @return ReleaseItem[]
      */

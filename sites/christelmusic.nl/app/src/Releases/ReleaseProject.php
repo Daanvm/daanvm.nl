@@ -9,6 +9,8 @@ interface ReleaseProject
     public function getTitle(): string;
     public function getSlug(): string;
     public function getHeaderImageUrl(): LocalUrl;
+    public function getProjectImageUrl(): LocalUrl;
+
 
     /**
      * @return ReleaseItem[]

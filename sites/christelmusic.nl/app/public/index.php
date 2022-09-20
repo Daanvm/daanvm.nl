@@ -34,7 +34,7 @@ $releases = [
     <div class="col-md-12">
         <p>
             <a href="/<?=$release->getSlug();?>">
-                <img src="<?=$release->getHeaderImageUrl()?>" alt="<?=$release->getTitle()?>" class="img-fluid border"/>
+                <img src="<?=$release->getProjectImageUrl()?>" alt="<?=$release->getTitle()?>" class="img-fluid border"/>
             </a>
         </p>
     </div>
