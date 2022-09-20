@@ -29,6 +29,11 @@ class Watershed implements ReleaseProject
         return new LocalUrl("/assets/images/project_watershed.jpg");
     }
 
+    public function getOgImageUrl(): LocalUrl
+    {
+        return new LocalUrl("/assets/images/watershed.jpg");
+    }
+
     /**
      * @return ReleaseItem[]
      */

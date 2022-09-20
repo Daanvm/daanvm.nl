@@ -29,6 +29,11 @@ class Landslide implements ReleaseProject
         return new LocalUrl("/assets/images/project_landslide.jpg");
     }
 
+    public function getOgImageUrl(): LocalUrl
+    {
+        return new LocalUrl("/assets/images/landslide.jpg");
+    }
+
     /**
      * @return ReleaseItem[]
      */

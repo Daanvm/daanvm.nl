@@ -10,6 +10,7 @@ interface ReleaseProject
     public function getSlug(): string;
     public function getHeaderImageUrl(): LocalUrl;
     public function getProjectImageUrl(): LocalUrl;
+    public function getOgImageUrl(): LocalUrl;
 
 
     /**

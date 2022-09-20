@@ -18,6 +18,8 @@ if (!isset($releaseProject)) {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <meta property="og:image" content="https://www.christelmusic.nl<?=$releaseProject->getOgImageUrl()?>" />
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
     <link href="./assets/theme.css?ver=<?=md5_file('./assets/theme.css')?>" rel="stylesheet"/>
 
