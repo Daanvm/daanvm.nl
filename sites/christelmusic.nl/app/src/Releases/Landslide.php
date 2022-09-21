@@ -53,7 +53,6 @@ class Landslide implements ReleaseProject
 
                 public function getImageUrl(): LocalUrl
                 {
-                    // TODO - Update image
                     return new LocalUrl("/assets/images/jewelcase_landslide.jpg");
                 }
 
@@ -75,7 +74,7 @@ class Landslide implements ReleaseProject
 
                 public function getPreSaveLink(): ?string
                 {
-                    return null;
+                    return 'https://ditto.fm/landslide-christel';
                 }
 
                 public function getStreamingInformation(): ReleaseStreamingInformation
