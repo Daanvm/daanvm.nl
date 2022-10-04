@@ -108,22 +108,28 @@ if (count($sheetMusics) > 0 && $isAlreadyReleased):
 <div class="row mt-5">
     <div class="col-md-8 offset-md-2">
         <h2>Download free sheet music</h2>
-
-        <?php foreach($sheetMusics as $sheetMusic): ?>
-        <div class="sheetmusic">
-            <img src="data:image/png;base64,<?=$sheetMusic->getBase64encodedPngData()?>" width="100%" /></td>
-            <span class="songname"><?=$sheetMusic->songName?></span>
-            <?php
-            $buttonText = sprintf(
-                "Download %d %s",
-                $sheetMusic->getNumberOfPages(),
-                $sheetMusic->getNumberOfPages() == 1 ? "page" : "pages"
-            );
-            ?>
-            <a class="btn btn-primary btn-<?=$releaseProject->getSlug()?>" target="_blank" href="<?=$sheetMusic->getPdfUrl()?>" role="button"><?=$buttonText?></a>
-        </div>
-        <?php endforeach; ?>
     </div>
+</div>
+<div class="row">
+    <?php foreach($sheetMusics as $sheetMusic): ?>
+    <?php
+    $nrOfPages = sprintf(
+        "%d %s",
+        $sheetMusic->getNumberOfPages(),
+        $sheetMusic->getNumberOfPages() == 1 ? "page" : "pages"
+    );
+    ?>
+    <div class="col-md-6 col-xl-4 col-sheetmusic">
+        <img src="data:image/png;base64,<?=$sheetMusic->getBase64encodedPngData()?>" width="100%" /></td>
+        <p>
+            <span class="songname"><?=$sheetMusic->songName?></span>
+            <span class="pages">(<?=$nrOfPages?>)</span>
+        </p>
+        <p>
+            <a class="btn btn-primary btn-<?=$releaseProject->getSlug()?>" target="_blank" href="<?=$sheetMusic->getPdfUrl()?>" role="button">Download</a>
+        </p>
+    </div>
+    <?php endforeach; ?>
 </div>
 <?php endif; ?>
 

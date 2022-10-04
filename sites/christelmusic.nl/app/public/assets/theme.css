@@ -109,18 +109,19 @@ ol.album-tracks {
     text-align: left;
 }
 
-.sheetmusic {
-    display: block;
-    width: 400px;
-    float: left;
+.col-sheetmusic {
     text-align: left;
 }
-.sheetmusic img {
+.col-sheetmusic img {
     display: block;
     float: left;
-    width: 200px;
+    width: 180px;
 }
-.sheetmusic .songname {
+.col-sheetmusic .songname {
     display: block;
     margin-top: 30px;
+}
+.col-sheetmusic .pages {
+    display: block;
+    font-style: italic;
 }
