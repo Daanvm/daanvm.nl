@@ -115,7 +115,7 @@ class Landslide implements ReleaseProject
 
                 public function getOrderPrice(): Money
                 {
-                    return Money::EUR(800);
+                    return Money::EUR(1000);
                 }
             },
             new class implements ReleaseItemSingle {
