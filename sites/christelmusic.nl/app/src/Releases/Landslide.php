@@ -161,7 +161,7 @@ class Landslide implements ReleaseProject
             new class implements ReleaseItemSingle {
                 public function getTitle(): string
                 {
-                    return "Summer stroll";
+                    return "Summer Stroll";
                 }
 
                 public function getReleaseDate(): DateTimeImmutable
