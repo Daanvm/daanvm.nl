@@ -4,6 +4,8 @@
  */
 
 use ChristelMusic\Releases\ReleaseItemAlbum;use ChristelMusic\Releases\ReleaseProject;
+use Money\Currencies\ISOCurrencies;
+use Money\Formatter\DecimalMoneyFormatter;
 use Webmozart\Assert\Assert;
 
 require_once '../vendor/autoload.php';
@@ -13,9 +15,12 @@ Assert::isInstanceOf($releaseProject, ReleaseProject::class);
 $pageName = $releaseProject->getTitle();
 require './includes/header.php';
 
+$currencies = new ISOCurrencies();
+$moneyFormatter = new DecimalMoneyFormatter($currencies);
+
 foreach($releaseProject->getReleaseItems() as $releaseItem):
-    $isNotReleasedYet = $releaseItem->getReleaseDate() > new DateTimeImmutable();
-    $isAlreadyReleased = !$isNotReleasedYet;
+    $isAlreadyReleased = $releaseItem->getReleaseDate() < new DateTimeImmutable() || isset($_GET['test']);
+    $isNotReleasedYet = !$isAlreadyReleased;
 ?>
 <div class="row mt-5">
     <div class="col-md-6 order-md-2">
@@ -24,7 +29,7 @@ foreach($releaseProject->getReleaseItems() as $releaseItem):
         </p>
         <?php if ($releaseItem instanceof ReleaseItemAlbum && $isAlreadyReleased): ?>
             <p>
-                <a class="btn btn-primary btn-<?=$releaseProject->getSlug()?>" href="/cd" role="button">Order the CD for €8.00</a>
+                <a class="btn btn-primary btn-<?=$releaseProject->getSlug()?>" href="<?=$releaseItem->getOrderUrl()?>" role="button">Order the CD for €<?=$moneyFormatter->format($releaseItem->getOrderPrice())?></a>
             </p>
         <?php endif; ?>
     </div>
@@ -98,7 +103,7 @@ foreach($releaseProject->getReleaseItems() as $releaseItem):
 
 <?php
 $sheetMusics = $releaseItem->getSheetMusics();
-if (count($sheetMusics) > 0 && ($isAlreadyReleased || isset($_GET['test']))):
+if (count($sheetMusics) > 0 && $isAlreadyReleased):
 ?>
 <div class="row mt-5">
     <div class="col-md-8 offset-md-2">

@@ -6,6 +6,7 @@ use ChristelMusic\LocalUrl;
 use ChristelMusic\SheetMusic;
 use DateTimeImmutable;
 use DateTimeZone;
+use Money\Money;
 
 class Landslide implements ReleaseProject
 {
@@ -105,6 +106,16 @@ class Landslide implements ReleaseProject
                         new SheetMusic('Summer Stroll', 'landslide/09 Summer_Stroll.pdf'),
                         new SheetMusic('Fairytale Forest Pt. 3', 'landslide/10 Fairytale_Forest_Pt._3.pdf'),
                     ];
+                }
+
+                public function getOrderUrl(): LocalUrl
+                {
+                    return new LocalUrl("/landslide_order");
+                }
+
+                public function getOrderPrice(): Money
+                {
+                    return Money::EUR(800);
                 }
             },
             new class implements ReleaseItemSingle {

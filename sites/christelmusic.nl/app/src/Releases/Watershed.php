@@ -6,6 +6,7 @@ use ChristelMusic\LocalUrl;
 use ChristelMusic\SheetMusic;
 use DateTimeImmutable;
 use DateTimeZone;
+use Money\Money;
 
 class Watershed implements ReleaseProject
 {
@@ -92,6 +93,16 @@ class Watershed implements ReleaseProject
                 public function getSheetMusics(): array
                 {
                     return [];
+                }
+
+                public function getOrderUrl(): LocalUrl
+                {
+                    return new LocalUrl("/watershed_order");
+                }
+
+                public function getOrderPrice(): Money
+                {
+                    return Money::EUR(800);
                 }
             },
             new class implements ReleaseItemSingle {

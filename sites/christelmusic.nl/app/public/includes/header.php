@@ -7,6 +7,8 @@
 use ChristelMusic\Releases\Landslide;
 use ChristelMusic\Releases\ReleaseProject;
 
+require_once '../vendor/autoload.php';
+
 if (!isset($releaseProject)) {
     $releaseProject = new Landslide();
 }

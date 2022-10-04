@@ -1,8 +1,38 @@
 <?php
+/**
+ * @var ReleaseProject $releaseProject
+ */
 
 use ChristelMusic\FormData;
+use ChristelMusic\Releases\Landslide;
+use ChristelMusic\Releases\ReleaseItem;
+use ChristelMusic\Releases\ReleaseItemAlbum;
+use ChristelMusic\Releases\ReleaseProject;
+use ChristelMusic\Releases\Watershed;
+use Money\Currencies\ISOCurrencies;
+use Money\Formatter\DecimalMoneyFormatter;
+use Webmozart\Assert\Assert;
 
 require_once '../vendor/autoload.php';
+
+Assert::isInstanceOf($releaseProject, ReleaseProject::class);
+
+
+$findAlbum = static fn (ReleaseItem $releaseItem) => $releaseItem instanceof ReleaseItemAlbum;
+$watershedAlbumReleaseItem = array_filter((new Watershed())->getReleaseItems(), $findAlbum)[0];
+$landslideAlbumReleaseItem = array_filter((new Landslide())->getReleaseItems(), $findAlbum)[0];
+
+/** @var ReleaseItemAlbum[] $albumReleaseItems */
+$albumReleaseItems = [$watershedAlbumReleaseItem, $landslideAlbumReleaseItem];
+
+// Put Landslide on top if that's the current album being ordered
+if ($releaseProject instanceof Landslide) {
+    $albumReleaseItems = array_reverse($albumReleaseItems);
+}
+
+// Find the release item for the currently being ordered album
+$activeAlbumReleaseItem = array_filter($releaseProject->getReleaseItems(), $findAlbum)[0];
+Assert::isInstanceOf($activeAlbumReleaseItem, ReleaseItemAlbum::class);
 
 if (!empty($_POST['submit'])) {
     $data = FormData::fromPost($_POST);
@@ -20,7 +50,8 @@ Address: " . htmlentities($data->address) . "<br />
 Postal Code: " . htmlentities($data->postalCode) . "<br />
 City: " . htmlentities($data->city) . "<br />
 Country: " . htmlentities($data->country) . "<br />
-Quantity: " . htmlentities($data->quantity) . "<br />
+Watershed quantity: " . htmlentities($data->quantityWatershed) . "<br />
+Landslide quantity: " . htmlentities($data->quantityLandslide) . "<br />
 <br />        
 Groetjes,<br />
 Je websitebouwer<br />
@@ -37,36 +68,47 @@ Je websitebouwer<br />
         $ch = curl_init('https://maker.ifttt.com/trigger/watershed_ordered/with/key/' . $ifttt_key);
         curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($payload));
         curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
         $result = curl_exec($ch);
         curl_close($ch);
 
-        if ($result) {
-            // Redirect to success message.
-            header('Location: /thanks');
-            exit;
-        } else {
+        if ($result === false) {
             echo "There was an error.";
             exit;
         }
+
+        $responseCode = curl_getinfo($ch, CURLINFO_RESPONSE_CODE);
+
+        if ($responseCode >= 400) {
+            echo "There was an error: {$responseCode}. ";
+            exit;
+        }
+
+        // Redirect to success message.
+        header('Location: /thanks');
+        exit;
     }
 } else {
     $data = FormData::empty();
 }
 
-$pageName = 'Order album Watershed';
+$pageName = 'Order album ' . $activeAlbumReleaseItem->getTitle();
 require './includes/header.php';
+
+$currencies = new ISOCurrencies();
+$moneyFormatter = new DecimalMoneyFormatter($currencies);
 
 ?>
 
 <div class="row">
     <div class="col-md-6 offset-md-3">
-        <h1>Order now: Watershed</h1>
-        <p>€8,00 (+ shipping costs)</p>
+        <h1>Order now: <?=$activeAlbumReleaseItem->getTitle()?></h1>
+        <p>€<?=$moneyFormatter->format($activeAlbumReleaseItem->getOrderPrice())?> (+ shipping costs)</p>
         <p>
-            <img src="/assets/images/jewelcase_watershed.jpg" class="img-fluid"/>
+            <img src="<?=$activeAlbumReleaseItem->getImageUrl()?>" class="img-fluid"/>
         </p>
-        <form method="post" action="/cd">
+        <form method="post" action="<?=$activeAlbumReleaseItem->getOrderUrl()?>">
             <div class="form-group row">
                 <label for="name" class="col-sm-3 col-form-label">Name</label>
                 <div class="col-sm-9">
@@ -123,17 +165,30 @@ require './includes/header.php';
                     <?=$data->getHtmlFeedback('country')?>
                 </div>
             </div>
-            <div class="form-group row">
-                <label for="quantity" class="col-sm-3 col-form-label">Quantity</label>
-                <div class="col-sm-9">
-                    <select class="form-control <?=$data->getHtmlClass('quantity')?>" id="quantity" name="quantity">
-                        <option value="1"<?=$data->quantity == 1 ? 'selected' : ''?>>1 CD - €8.00 + shipping costs</option>
-                        <option value="2"<?=$data->quantity == 2 ? 'selected' : ''?>>2 CDs - €16.00 + shipping costs</option>
-                        <option value="3"<?=$data->quantity == 3 ? 'selected' : ''?>>3 CDs - €24.00 + shipping costs</option>
-                    </select>
-                    <?=$data->getHtmlFeedback('quantity')?>
+
+            <?php foreach ($albumReleaseItems as $albumReleaseItem): ?>
+                <?php
+                $quantityId = "quantity" . $albumReleaseItem->getTitle();
+
+                if ($albumReleaseItem->getTitle() === $activeAlbumReleaseItem->getTitle() && !$data->isSubmitted()) {
+                    // Always default to 1 album of the currently active project.
+                    $data->{$quantityId} = 1;
+                }
+                ?>
+                <div class="form-group row">
+                    <label for="<?=$quantityId?>" class="col-sm-3 col-form-label"><?=$albumReleaseItem->getTitle()?> qty</label>
+                    <div class="col-sm-9">
+                        <select class="form-control <?=$data->getHtmlClass($quantityId)?>" id="<?=$quantityId?>" name="<?=$quantityId?>">
+                            <option value="0"<?=$data->{$quantityId} == 0 ? 'selected' : ''?>>No <?=$albumReleaseItem->getTitle()?> CD</option>
+                            <option value="1"<?=$data->{$quantityId} == 1 ? 'selected' : ''?>>1 <?=$albumReleaseItem->getTitle()?> CD - €<?=$moneyFormatter->format($albumReleaseItem->getOrderPrice()->multiply(1))?> + shipping costs</option>
+                            <option value="2"<?=$data->{$quantityId} == 2 ? 'selected' : ''?>>2 <?=$albumReleaseItem->getTitle()?> CDs - €<?=$moneyFormatter->format($albumReleaseItem->getOrderPrice()->multiply(2))?> + shipping costs</option>
+                            <option value="3"<?=$data->{$quantityId} == 3 ? 'selected' : ''?>>3 <?=$albumReleaseItem->getTitle()?> CDs - €<?=$moneyFormatter->format($albumReleaseItem->getOrderPrice()->multiply(3))?> + shipping costs</option>
+                        </select>
+                        <?=$data->getHtmlFeedback($quantityId)?>
+                    </div>
                 </div>
-            </div>
+            <?php endforeach; ?>
+
             <div class="row">
                 <div class="col-sm-12 mt-3">
                     <p>Thank you for your order! I will send you a payment link by email later.</p>
@@ -141,7 +196,7 @@ require './includes/header.php';
             </div>
             <div class="form-group row">
                 <div class="col-sm-12">
-                    <button type="submit" name="submit" value="submit" class="btn btn-primary btn-watershed">Order now</button>
+                    <button type="submit" name="submit" value="submit" class="btn btn-primary btn-<?=$releaseProject->getSlug()?>">Order now</button>
                 </div>
             </div>
         </form>

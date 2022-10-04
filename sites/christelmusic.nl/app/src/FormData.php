@@ -16,7 +16,8 @@ class FormData
     public $postalCode;
     public $city;
     public $country;
-    public $quantity;
+    public $quantityWatershed;
+    public $quantityLandslide;
 
     private $errorMessages = [];
 
@@ -30,7 +31,8 @@ class FormData
         $formData->postalCode = $postData['postalCode'];
         $formData->city = $postData['city'];
         $formData->country = $postData['country'];
-        $formData->quantity = intval($postData['quantity']);
+        $formData->quantityWatershed = intval($postData['quantityWatershed']);
+        $formData->quantityLandslide = intval($postData['quantityLandslide']);
 
         $formData->validate();
 
@@ -42,8 +44,15 @@ class FormData
         $formData = new self();
         $formData->is_submitted = false;
         $formData->country = 'The Netherlands';
+        $formData->quantityWatershed = 0;
+        $formData->quantityLandslide = 0;
 
         return $formData;
+    }
+
+    public function isSubmitted(): bool
+    {
+        return $this->is_submitted;
     }
 
     public function isValid(): bool
@@ -79,10 +88,14 @@ class FormData
 
     private function validate(): void
     {
-        foreach (['name', 'email', 'address', 'postalCode', 'city', 'country', 'quantity'] as $field) {
+        foreach (['name', 'email', 'address', 'postalCode', 'city', 'country'] as $field) {
             if (empty($this->{$field})) {
                 $this->errorMessages[$field] = 'This is a required field.';
             }
+        }
+
+        if (empty($this->quantityWatershed) && empty($this->quantityLandslide)) {
+            $this->errorMessages['quantityWatershed'] = $this->errorMessages['quantityLandslide'] = 'At least one album must be ordered.';
         }
 
         if (!isset($this->errorMessages['email']) && !filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
