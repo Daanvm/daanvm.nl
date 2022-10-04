@@ -91,13 +91,7 @@ class Watershed implements ReleaseProject
                  */
                 public function getSheetMusics(): array
                 {
-                    return [
-                        new SheetMusic('Watershed', 'watershed/Watershed.pdf'),
-                        new SheetMusic('A Glimpse of Hope', 'watershed/A Glimpse of Hope.pdf'),
-                        new SheetMusic('Memories', 'watershed/Memories.pdf'),
-                        new SheetMusic('Chased by Shadows', 'watershed/Chased by Shadows.pdf'),
-                        new SheetMusic('Mischievous Exploration', 'watershed/Mischievous Exploration.pdf'),
-                    ];
+                    return [];
                 }
             },
             new class implements ReleaseItemSingle {
