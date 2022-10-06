@@ -9,7 +9,7 @@ services:
     volumes:
       - ./app/public:/usr/share/nginx/html/:delegated
     ports:
-      - '8080:80'
+      - '8081:80'
 
   christelmusic-nl-php:
     build:
