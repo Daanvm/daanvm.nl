@@ -81,11 +81,11 @@ class Landslide implements ReleaseProject
                 public function getStreamingInformation(): ReleaseStreamingInformation
                 {
                     return new ReleaseStreamingInformation(
-                        '',
-                        '',
-                        '',
-                        null,
-                        '',
+                        'https://open.spotify.com/album/4TWSouIwGD13ShRFv6iA9w',
+                        'https://music.apple.com/nl/album/landslide/1643109824',
+                        'https://deezer.page.link/i6YyZYrW7X4eEdYE6',
+                        'https://tidal.com/browse/album/246295181',
+                        'https://music.amazon.com/albums/B0BCWBNGXJ',
                     );
                 }
 
@@ -145,7 +145,7 @@ class Landslide implements ReleaseProject
                         'https://open.spotify.com/track/0ozKYqOXbeGPSo6oNlehmz',
                         'https://music.apple.com/nl/album/supremacy-single/1638051087',
                         'https://deezer.page.link/B8SCsYHN19zefw7Z6',
-                        null,
+                        'https://tidal.com/browse/track/246295187',
                         'https://music.amazon.com/albums/B0B8MVP2SW',
                     );
                 }
@@ -176,7 +176,7 @@ class Landslide implements ReleaseProject
 
                 public function getPreSaveLink(): ?string
                 {
-                    return 'https://ditto.fm/supremacy-christel';
+                    return null;
                 }
 
                 public function getStreamingInformation(): ReleaseStreamingInformation
@@ -185,7 +185,7 @@ class Landslide implements ReleaseProject
                         'https://open.spotify.com/track/0n9RsgRoPBWbtVs84s5aQF',
                         'https://music.apple.com/nl/album/summer-stroll-single/1638050773',
                         'https://deezer.page.link/R9WmedLRmHCuQFd67',
-                        null,
+                        'https://tidal.com/browse/track/246295190',
                         'https://music.amazon.com/albums/B0B8MVM9WR',
                     );
                 }
