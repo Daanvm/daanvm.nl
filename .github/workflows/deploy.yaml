@@ -78,7 +78,7 @@ jobs:
         run: doctl kubernetes cluster kubeconfig save --expiry-seconds 600 k8s-daanvm
 
       - name: Install helm
-        uses: azure/setup-helm@v1
+        uses: azure/setup-helm@v3
 
       - name: Set up helm
         run: |
