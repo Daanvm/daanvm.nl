@@ -92,7 +92,7 @@ jobs:
       - name: Install cert manager with helm
         run: |
           kubectl create namespace cert-manager --dry-run=client -o yaml | kubectl apply -f -
-          helm upgrade --install cert-manager jetstack/cert-manager --namespace cert-manager --version v1.2.0 --set installCRDs=true
+          helm upgrade --install cert-manager jetstack/cert-manager --namespace cert-manager --version v1.7.1 --set installCRDs=true
           kubectl apply -f ./config/kubernetes/cert-manager-letsencrypt.yaml
 
       - name: Create kubernetes resources
