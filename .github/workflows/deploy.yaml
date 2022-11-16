@@ -30,8 +30,6 @@ jobs:
           tags: daanvm/daanvm.nl-nginx:latest
           cache-from: type=gha
           cache-to: type=gha,mode=max
-      - name: Image digest
-        run: echo ${{ steps.docker_build_daanvm_nl_nginx.outputs.digest }}
 
       - name: Build and push daanvm.nl-php
         id: docker_build_daanvm_nl_php
@@ -43,8 +41,6 @@ jobs:
           tags: daanvm/daanvm.nl-php:latest
           cache-from: type=gha
           cache-to: type=gha,mode=max
-      - name: Image digest
-        run: echo ${{ steps.docker_build_daanvm_nl_php.outputs.digest }}
 
   deploy-kubernetes:
     name: Create Kubernetes resources
