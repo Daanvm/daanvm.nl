@@ -11,6 +11,9 @@ jobs:
       - name: Checkout master
         uses: actions/checkout@v3
 
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
       - name: Login to DockerHub
         uses: docker/login-action@v2
         with:
@@ -25,6 +28,8 @@ jobs:
           file: ./Dockerfile-nginx
           push: true
           tags: daanvm/daanvm.nl-nginx:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
       - name: Image digest
         run: echo ${{ steps.docker_build_daanvm_nl_nginx.outputs.digest }}
 
@@ -36,6 +41,8 @@ jobs:
           file: ./Dockerfile-php
           push: true
           tags: daanvm/daanvm.nl-php:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
       - name: Image digest
         run: echo ${{ steps.docker_build_daanvm_nl_php.outputs.digest }}
 
