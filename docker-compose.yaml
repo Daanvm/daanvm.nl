@@ -3,7 +3,7 @@ version: '3'
 services:
   daanvm-nl-nginx:
     build:
-      context: .
+      context: sites/daanvm.nl
       dockerfile: Dockerfile-nginx
     restart: unless-stopped
     volumes:
@@ -13,7 +13,7 @@ services:
 
   daanvm-nl-php:
     build:
-      context: .
+      context: sites/daanvm.nl
       dockerfile: Dockerfile-php
     restart: unless-stopped
     volumes:
