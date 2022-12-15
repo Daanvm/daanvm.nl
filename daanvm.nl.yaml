@@ -16,7 +16,7 @@ kind: Deployment
 metadata:
   name: daanvm-nl
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: daanvm-nl
@@ -54,7 +54,7 @@ kind: Deployment
 metadata:
   name: daanvm-nl-php
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: daanvm-nl-php
